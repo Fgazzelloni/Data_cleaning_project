@@ -20,3 +20,5 @@ if (!file.exists("samsung_dataset")) {
   unzip(filename)
 }
 
+
+#reading data from txt files
