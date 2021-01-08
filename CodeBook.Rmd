@@ -1,0 +1,182 @@
+---
+title: "Variables Codebook"
+subtitle: "Data cleaning project JHU"
+
+author: "Federica Gazzelloni"
+date: "23/12/2020"
+
+output:
+  html_document:
+    toc: TRUE
+    number_sections: FALSE
+    toc_float:
+      collapsed: TRUE
+      smooth_scroll: FALSE
+      
+    keep_md: yes
+---
+
+
+```{r}
+library(rmarkdown)
+library(knitr)
+```
+
+
+# Project Description
+It is a randomized sample training and test analysis of a group of 30 volunteers within an age bracket of 19-48 years.
+
+Individuals performed six activities:
+
+- WALKING
+- WALKING_UPSTAIRS
+- WALKING_DOWNSTAIRS
+- SITTING
+- STANDING
+- LAYING
+
+wearing a smartphone (Samsung Galaxy S II) on the waist to capture acceleration and velocity.
+
+
+
+# Study design and data processing 
+
+### Randomize experiment divided the group into:{.tabset}
+
+- training 70%
+- test 30%
+
+### Variation
+The variation measured through sensor signals captured by "t" time-domain and "-XYZ" 3-axial signals in the X, Y and Z directions, indicated as:
+
+### 
+* "tAcc-XYZ"  accelerometer subgroupped into:
+                               
+                               >- "tBodyAcc-XYZ"      body acceleration 
+                               >- "tGravityAcc-XYZ"   gravity
+* "tGyro-XYZ" gyroscope
+
+In particular, signals were captured at a constant of 50Hz and then filtered by:
+- median
+- third order removal noise corner frequency of 20 Hz
+- subgroupped corner frequency of 0.3 Hz
+
+
+A list of variables taken into consideration for the measurement of the data processing are subdivided by the nature, magnitude and frequency, as described below.
+
+
+### Jerk signals
+Jerk signals obtained deriving the body linear acceleration and angular velocity:
+- tBodyAccJerk-XYZ
+- tBodyGyroJerk-XYZ
+
+### Magnitude
+The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
+- tBodyAccMag
+- tGravityAccMag
+
+- tBodyGyroMag
+
+- tBodyAccJerkMag
+- tBodyGyroJerkMag
+
+### Frequency
+The Fast Fourier Transform (FFT) was applied to some of these signals producing,"f" frequency domain signals:
+- fBodyAcc-XYZ 
+- fBodyGyro-XYZ
+
+- fBodyAccJerk-XYZ
+- fBodyAccJerkMag
+
+- fBodyGyroMag
+- fBodyGyroJerkMag
+
+### Descriptive statistics
+Finally,descriptive statistics were calculated to analyze results,in particular the following are the two measures of interest in this project:  
+- mean(): Mean value
+- std(): Standard deviation
+
+
+### Collection of the raw data
+The experiments have been video-recorded to label the data manually, and randomly partitioned into two sets.
+
+
+
+# Creating the tidy datafile
+
+### Guide to create the tidy data file
+1. download the data and unzip it in the project folder
+2. check of the original "Readme.txt" and "features_info.txt" files for information about how variables are listed and what is their meaning
+3. identify the location of the variables of interest for the project
+4. check the structure of the data sets for merging column names with content
+5. extracting needed information by the selection of the columns containing the descriptive statistics as requested.
+6. split the columns to selected information to obtain a tidy data set
+
+
+### Cleaning of the data
+The cleaning script download and unzip the data sets, to check the requested information and the structure of the sets for merging them in a unique dataframe.
+
+```{r}
+#source("README.md")
+```
+
+
+
+# Description of the variables
+General description of the file including:
+ - Dimensions of the dataset
+ - Summary of the data
+ - Variables present in the dataset
+
+(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
+
+### Variable 1 (repeat this section for all variables in the dataset)
+Short description of what the variable describes.
+
+Some information on the variable including:
+ - Class of the variable
+ - Unique values/levels of the variable
+ - Unit of measurement (if no unit of measurement list this as well)
+ - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+
+(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
+
+#### Notes on variable 1:
+If available, some additional notes on the variable not covered elsewehere. If no notes are present leave this section out.
+
+# Sources
+Sources you used if any, otherise leave out.
+
+## Annex
+If you used any code in the codebook that had the echo=FALSE attribute post this here (make sure you set the results parameter to 'hide' as you do not want the results to show again)
+
+```{r}
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, type = "b", pch = 19)
+```
+
+```{r}
+knitr::kable(
+  head(iris, 20), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

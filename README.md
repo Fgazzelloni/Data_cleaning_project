@@ -14,7 +14,7 @@ Here are the data for the project: https://d396qusza40orc.cloudfront.net/getdata
 
 The project includes a R script called run_analysis.R which contains:
 
-- merges of the train and the test sets to create one data set
+- merges of the training and the test sets to create one data set
 - extraction of the descriptive statistics (mean and standard deviation) for each measurement
 - description of the activities in the data set
 - data labels with descriptive variable names
