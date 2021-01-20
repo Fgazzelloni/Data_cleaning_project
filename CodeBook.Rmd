@@ -1,6 +1,6 @@
 ---
 title: "Variables Codebook"
-subtitle: "Data cleaning project JHU"
+subtitle: "Data cleaning project - Getting Cleaning Data - JHU"
 
 author: "Federica Gazzelloni"
 date: "23/12/2020"
@@ -14,6 +14,7 @@ output:
       smooth_scroll: FALSE
       
     keep_md: yes
+    
 ---
 
 
@@ -23,10 +24,10 @@ library(knitr)
 ```
 
 
-# Project Description
-It is a randomized sample training and test analysis of a group of 30 volunteers within an age bracket of 19-48 years.
+# Data Cleaning Project Description
 
-Individuals performed six activities:
+Randomized sample training and test analysis of a group of 30 volunteers within an age bracket of 19-48 years.
+Individuals performed the following six activities:
 
 - WALKING
 - WALKING_UPSTAIRS
@@ -35,72 +36,122 @@ Individuals performed six activities:
 - STANDING
 - LAYING
 
-wearing a smartphone (Samsung Galaxy S II) on the waist to capture acceleration and velocity.
+while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
+
+- acceleration with an accelerometer (3-axial linear acceleration)has gravitational and body motion components,body acceleration and gravity
+
+- velocity with a gyroscope (3-axial angular velocity)
 
 
+##### \
 
 # Study design and data processing 
 
-### Randomize experiment divided the group into:{.tabset}
+##### Randomize experiment divided the group into:
 
 - training 70%
 - test 30%
 
-### Variation
-The variation measured through sensor signals captured by "t" time-domain and "-XYZ" 3-axial signals in the X, Y and Z directions, indicated as:
+##### \
 
-### 
-* "tAcc-XYZ"  accelerometer subgroupped into:
-                               
-                               >- "tBodyAcc-XYZ"      body acceleration 
-                               >- "tGravityAcc-XYZ"   gravity
-* "tGyro-XYZ" gyroscope
+## Measurement of Variation
 
-In particular, signals were captured at a constant of 50Hz and then filtered by:
+##### The variations is measured in:
+
+- Time
+- Frequency
+
+### Time
+
+##### The measure capture variation through sensor signals indicated by the variable "t" time-domain and takes consideration of the "-XYZ" 3-axial signals in the X, Y and Z directions, as indicated below:
+
+- "tAcc-XYZ" ( Time accelerometer 3-axial signals ) subgroupped into:
+                              
+                              "tBodyAcc-XYZ"      ( Time Body Accelerometer 3-axial signals )
+                              "tGravityAcc-XYZ"   ( Time Gravity accelerometer 3-axial signals )
+                              
+- "tGyro-XYZ" ( Time Gyroscope 3-axial signals )
+
+###### \
+##### In particular, signals were captured at a constant of 50Hz and then filtered by:
+
 - median
 - third order removal noise corner frequency of 20 Hz
-- subgroupped corner frequency of 0.3 Hz
+- subgroup corner frequency of 0.3 Hz
 
 
-A list of variables taken into consideration for the measurement of the data processing are subdivided by the nature, magnitude and frequency, as described below.
+##### A list of variables taken into consideration for the measurement of the data processing are subdivided by:
+
+- nature
+- magnitude
+- frequency
 
 
 ### Jerk signals
-Jerk signals obtained deriving the body linear acceleration and angular velocity:
-- tBodyAccJerk-XYZ
-- tBodyGyroJerk-XYZ
+#### Obtained deriving the body linear acceleration and the angular velocity:
+
+- tBodyAccJerk-XYZ  ( Time Body Accelerometer Jerk 3-axial signals )
+- tBodyGyroJerk-XYZ ( Time Body Gyroscope Jerk 3-axial signals )
 
 ### Magnitude
-The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
-- tBodyAccMag
-- tGravityAccMag
+#### The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
 
-- tBodyGyroMag
+- tBodyAccMag ( Time Body Accelerometer Magnitude )
+- tGravityAccMag ( Time Gravity Accelerometer Magnitude )
 
-- tBodyAccJerkMag
-- tBodyGyroJerkMag
+- tBodyGyroMag  ( Time Body Gyroscope Magnitude )
+
+- tBodyAccJerkMag ( Time Body Accelerometer Jerk Magnitude )
+- tBodyGyroJerkMag ( Time Body Gyroscope Jerk Magnitude )
+
 
 ### Frequency
-The Fast Fourier Transform (FFT) was applied to some of these signals producing,"f" frequency domain signals:
-- fBodyAcc-XYZ 
-- fBodyGyro-XYZ
+##### The Fast Fourier Transform (FFT) was applied to some of these signals producing,"f" frequency domain signals:
 
-- fBodyAccJerk-XYZ
-- fBodyAccJerkMag
+###### Seven Frequency variables
 
-- fBodyGyroMag
-- fBodyGyroJerkMag
+- fBodyAcc-XYZ     ( Frequency Body Accelerometer 3-axial signals )
+- fBodyAccJerk-XYZ ( Frequency Body Accelerometer Jerk 3-axial signals )
+- fBodyAccMag      ( Frequency Body Accelerometer Magnitude )
+- fBodyAccJerkMag  ( Frequency Body Accelerometer Jerk Magnitude )
 
-### Descriptive statistics
-Finally,descriptive statistics were calculated to analyze results,in particular the following are the two measures of interest in this project:  
+
+- fBodyGyro-XYZ    ( Frequency Body Gyroscope 3-axial signals )
+- fBodyGyroJerkMag ( Frequency Body Gyroscope Jerk Magnitude )
+- fBodyGyroMag     ( Frequency Body Gyroscope Magnitude )
+
+##### \
+
+## Descriptive statistics
+##### Included descriptive statistics calculated to analyze results of measurements of interest in this project:  
+
 - mean(): Mean value
 - std(): Standard deviation
 
+##### Excluded descriptive statistics:
 
-### Collection of the raw data
+- mad(): Median absolute deviation 
+- max(): Largest value in array
+- min(): Smallest value in array
+- sma(): Signal magnitude area
+- energy(): Energy measure. Sum of the squares divided by the number of values. 
+- iqr(): Interquartile range 
+- entropy(): Signal entropy
+- arCoeff(): Autorregresion coefficients with Burg order equal to 4
+- correlation(): correlation coefficient between two signals
+- maxInds(): index of the frequency component with largest magnitude
+- meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+- skewness(): skewness of the frequency domain signal 
+- kurtosis(): kurtosis of the frequency domain signal 
+- bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+- angle(): Angle between to vectors.
+
+##### \
+
+## Collection of the raw data
 The experiments have been video-recorded to label the data manually, and randomly partitioned into two sets.
 
-
+##### \
 
 # Creating the tidy datafile
 
@@ -120,13 +171,38 @@ The cleaning script download and unzip the data sets, to check the requested inf
 #source("README.md")
 ```
 
-
+##### \
 
 # Description of the variables
 General description of the file including:
  - Dimensions of the dataset
+ 
+```{r message=FALSE, warning=FALSE}
+source("run_analysis.R")
+dim(tidy_data_set);
+head(tidy_data_set)
+```
+ 
  - Summary of the data
+ 
+```{r}
+require(plyr)
+measurements_list<-plyr::count(tidy_data_set$variable)
+head(measurements_list);
+dim(measurements_list)
+```
+ 
  - Variables present in the dataset
+
+```{r}
+time<-filter(measurements_list,grepl("Time",x))
+time<-arrange(time,x)
+write.table(time, "time.txt", row.name=FALSE)
+time_txt<-read.table("time.txt")
+
+
+frequency<-filter(measurements_list,grepl("Fre",x))
+```
 
 (you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
 
@@ -149,18 +225,6 @@ Sources you used if any, otherise leave out.
 
 ## Annex
 If you used any code in the codebook that had the echo=FALSE attribute post this here (make sure you set the results parameter to 'hide' as you do not want the results to show again)
-
-```{r}
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, type = "b", pch = 19)
-```
-
-```{r}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
 
 
 

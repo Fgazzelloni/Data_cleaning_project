@@ -2,7 +2,7 @@
 
 ## Coursera project Getting cleaning data JHU
 
-In this project data collected are assembled and manipulated to be used
+In this project data collected are assembled and manipulated to be used.
 
 Data are collected from the accelerometers from the Samsung Galaxy S smartphone. 
 
