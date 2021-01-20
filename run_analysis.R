@@ -116,6 +116,8 @@ training_and_test_stats<-training_and_test%>%
 head(training_and_test_stats,c(2,6))
 dim(training_and_test_stats)
 
+#remove the original
+rm(training_and_test)
 
 # 3- Add the description of the activities in the data set----
 
@@ -181,11 +183,11 @@ plyr::count(tidy_data_melt2$variable)
 tidy_data<-tidy_data_melt2 %>%
   tidyr::separate(variable,
                   into = c("Domain",
-                           "Acceleration",
+                           "Component",
                            "Sensor",
                            "Signal",
                            "Stats",
-                           "Directions"),
+                           "Direction"),
                   sep = "\\_")
 
 head(tidy_data)
@@ -195,42 +197,42 @@ rm(tidy_data_melt2)
 
 # check that the column's names contains the correct data
 plyr::count(tidy_data$Domain)
-plyr::count(tidy_data$Acceleration)
+plyr::count(tidy_data$Component)
 plyr::count(tidy_data$Sensor)
 # these columns are not sorted correctly
 plyr::count(tidy_data$Signal)#col 6
 plyr::count(tidy_data$Stats)#col 7
-plyr::count(tidy_data$Directions)#col 8
+plyr::count(tidy_data$Direction)#col 8
 
 # relocate the row variables in the correct column
 require(tidyverse)
 final<-tidy_data%>%
   as_tibble()%>%
-  select(Signal,Stats,Directions)%>% #selection of the columns to be fixed
+  select(Signal,Stats,Direction)%>% #selection of the columns to be fixed
   mutate(id=row_number())%>%         #add of an index to identify the column
   pivot_longer(-id)%>%               #long list of all the variables
   group_by(id)%>%
   summarize(                         #relocate variables in the correct column
     Signal = paste(value%>%keep(~.x %in% c("Jerk","Magnitude")),collapse="_"),
     Stats = paste(value%>%keep(~.x %in% c("MEAN","STD")),collapse=""),
-    Directions = paste(value%>%keep(~.x %in% c("X","Y","Z")),collapse="")
+    Direction = paste(value%>%keep(~.x %in% c("X","Y","Z")),collapse="")
   )%>%
   select(-id)
 
 
 # rebuild the data set with the original set and the fixed columns
 final1<-tidy_data%>%
-  select(-c(Signal,Stats,Directions))
+  select(-c(Signal,Stats,Direction))
 
 tidy_data<-cbind(final1,final)%>%
   select(Subject,
          Activity,
          Domain,
-         Acceleration,
+         Component,
          Sensor,
          Signal,
          Stats,
-         Directions,
+         Direction,
          Value="value")
 
 # remove "final1" and "final"
@@ -245,7 +247,7 @@ head(tidy_data);tail(tidy_data)
 
 write.table(tidy_data, "tidydata.txt", row.name=FALSE)
 
-tidydata<-read.table("tidydata.txt")
+tidy_data<-read.table("tidydata.txt")
 
 
 

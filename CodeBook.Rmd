@@ -47,25 +47,41 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 
 # Study design and data processing 
 
-##### Randomize experiment divided the group into:
+##### Randomize experiment divided the group of 30 volunteers into group proportions:
 
-- training 70%
-- test 30%
+- TRAINING 70%
+- TEST     30%
 
 ##### \
 
 ## Measurement of Variation
 
-##### The variations is measured in:
+##### The variations is measured in DOMAINS:
 
 - Time
 - Frequency
 
+##### The Motion COMPONENTS are:
+
+- Body
+- Gravity
+
+##### The type of SIGNALS:
+
+- Jerk      ( the rate at which an object's acceleration changes with respect to time, 
+              having both magnitude and direction )
+- Magnitude ( the maximum positive value of the height of the wave )
+
+##### The SENSORS used to measure the variation:
+
+- Accelerometer         
+- Gyroscope
+
 ### Time
 
-##### The measure capture variation through sensor signals indicated by the variable "t" time-domain and takes consideration of the "-XYZ" 3-axial signals in the X, Y and Z directions, as indicated below:
+##### The measure capture "t" time-domain variation through sensor signals and takes consideration of the "-XYZ" 3-axial signals in the X, Y and Z directions, as indicated below:
 
-- "tAcc-XYZ" ( Time accelerometer 3-axial signals ) subgroupped into:
+- "tAcc-XYZ"  ( Time accelerometer 3-axial signals ) subgroupped into:
                               
                               "tBodyAcc-XYZ"      ( Time Body Accelerometer 3-axial signals )
                               "tGravityAcc-XYZ"   ( Time Gravity accelerometer 3-axial signals )
@@ -73,19 +89,6 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 - "tGyro-XYZ" ( Time Gyroscope 3-axial signals )
 
 ###### \
-##### In particular, signals were captured at a constant of 50Hz and then filtered by:
-
-- median
-- third order removal noise corner frequency of 20 Hz
-- subgroup corner frequency of 0.3 Hz
-
-
-##### A list of variables taken into consideration for the measurement of the data processing are subdivided by:
-
-- nature
-- magnitude
-- frequency
-
 
 ### Jerk signals
 #### Obtained deriving the body linear acceleration and the angular velocity:
@@ -96,12 +99,12 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 ### Magnitude
 #### The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
 
-- tBodyAccMag ( Time Body Accelerometer Magnitude )
-- tGravityAccMag ( Time Gravity Accelerometer Magnitude )
+- tBodyAccMag      ( Time Body Accelerometer Magnitude )
+- tGravityAccMag   ( Time Gravity Accelerometer Magnitude )
 
-- tBodyGyroMag  ( Time Body Gyroscope Magnitude )
+- tBodyGyroMag     ( Time Body Gyroscope Magnitude )
 
-- tBodyAccJerkMag ( Time Body Accelerometer Jerk Magnitude )
+- tBodyAccJerkMag  ( Time Body Accelerometer Jerk Magnitude )
 - tBodyGyroJerkMag ( Time Body Gyroscope Jerk Magnitude )
 
 
