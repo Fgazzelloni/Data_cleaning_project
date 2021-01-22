@@ -32,11 +32,9 @@ list.files("UCI HAR Dataset" )
 
 ### FEATURES VECTOR----------------------------
 features<-read.table("UCI HAR Dataset/features.txt",col.names= c("id","features_names"))
-dim(features)
 
 ## ACTIVITY----------------------------------
 activity<-read.table("UCI HAR Dataset/activity_labels.txt", col.names= c("activity_code", "activity"))
-dim(activity)
 
 ## TRAIN AND TEST SETS------------------------------------------
 # list all the files inside "train" and "test" folders
@@ -51,9 +49,8 @@ train_subj<-read.table("UCI HAR Dataset/train/subject_train.txt",col.names= "sub
 test_subj<-read.table("UCI HAR Dataset/test/subject_test.txt",col.names= "subject")
 
 # check of the proportion of the subjects divided by 30% and 70% in the training and test groups
-require(plyr)
-count(train_subj);
-count(test_subj)
+plyr::count(train_subj);
+plyr::count(test_subj)
 
 # merge SUBJECT for train and test sets----
 merged_subj<-rbind(train_subj,test_subj)
@@ -108,9 +105,10 @@ rm(merged_subj);rm(merged_lab);rm(merged_values)
 
 # Extraction of selected descriptive statistics for each measurement
 # select only mean and standard deviation, no angle() function measurements or others mean frequencies
+require(dplyr)
 training_and_test_stats<-training_and_test%>%
-  select(subject,activity_code,!contains(c("meanFreq", "angle"),ignore.case = TRUE))%>%
-  select(subject,activity_code,contains(c("mean","std"), ignore.case = TRUE))
+  dplyr::select(subject,activity_code,!contains(c("meanFreq", "angle"),ignore.case = TRUE))%>%
+  dplyr::select(subject,activity_code,contains(c("mean","std"), ignore.case = TRUE))
 
 # check of the structure of the sets
 head(training_and_test_stats,c(2,6))
@@ -207,17 +205,17 @@ plyr::count(tidy_data$Direction)#col 8
 # relocate the row variables in the correct column
 require(tidyverse)
 final<-tidy_data%>%
-  as_tibble()%>%
-  select(Signal,Stats,Direction)%>% #selection of the columns to be fixed
-  mutate(id=row_number())%>%         #add of an index to identify the column
-  pivot_longer(-id)%>%               #long list of all the variables
-  group_by(id)%>%
-  summarize(                         #relocate variables in the correct column
-    Signal = paste(value%>%keep(~.x %in% c("Jerk","Magnitude")),collapse="_"),
-    Stats = paste(value%>%keep(~.x %in% c("MEAN","STD")),collapse=""),
-    Direction = paste(value%>%keep(~.x %in% c("X","Y","Z")),collapse="")
+  tibble::as_tibble()%>%
+  dplyr::select(Signal,Stats,Direction)%>%     #selection of the columns to be fixed
+  dplyr::mutate(id = row_number())%>%         #add of an index to identify the column
+  tidyr::pivot_longer(-id)%>%                         #long list of all the variables
+  dplyr::group_by(id)%>%
+  dplyr::summarize(                                   #relocate variables in the correct column
+    Signal =    paste(value %>% purrr::keep(~.x %in% c("Jerk","Magnitude")),collapse="_"),
+    Stats =     paste(value %>% purrr::keep(~.x %in% c("MEAN","STD")),collapse=""),
+    Direction = paste(value %>% purrr::keep(~.x %in% c("X","Y","Z")),collapse="")
   )%>%
-  select(-id)
+  dplyr::select(-id)
 
 
 # rebuild the data set with the original set and the fixed columns
@@ -246,8 +244,7 @@ head(tidy_data);tail(tidy_data)
 # TIDY DATA #########################################################################
 
 write.table(tidy_data, "tidydata.txt", row.name=FALSE)
-
-tidy_data<-read.table("tidydata.txt")
+tidy_data<-read.table("tidydata.txt",header=TRUE)
 
 
 

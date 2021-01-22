@@ -3,7 +3,7 @@ title: "Variables Codebook"
 subtitle: "Data cleaning project - Getting Cleaning Data - JHU"
 
 author: "Federica Gazzelloni"
-date: "23/12/2020"
+date: "23/12/2020 - 22/01/2021"
 
 output:
   html_document:
@@ -27,30 +27,22 @@ library(knitr)
 # Data Cleaning Project Description
 
 Randomized sample training and test analysis of a group of 30 volunteers within an age bracket of 19-48 years.
-Individuals performed the following six activities:
+Individuals performed six activities while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 
-- WALKING
-- WALKING_UPSTAIRS
-- WALKING_DOWNSTAIRS
-- SITTING
-- STANDING
-- LAYING
-
-while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
-
-- acceleration with an accelerometer (3-axial linear acceleration)has gravitational and body motion components,body acceleration and gravity
-
-- velocity with a gyroscope (3-axial angular velocity)
+- acceleration with an accelerometer 
+- velocity with a gyroscope 
 
 
 ##### \
 
 # Study design and data processing 
 
-##### Randomize experiment divided the group of 30 volunteers into group proportions:
+##### The experiment randomized a group of 30 volunteers into two subgroup in proportions:
 
 - TRAINING 70%
 - TEST     30%
+
+To measure the variation in Time and Frequency of linear acceleration and angular velocity with sensor signals accelerometer and gyroscope by applying noise filters and then sampled.
 
 ##### \
 
@@ -68,20 +60,24 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 
 ##### The type of SIGNALS:
 
-- Jerk      ( the rate at which an object's acceleration changes with respect to time, 
+- Jerk      ( rate at which an object's acceleration changes with respect to time, 
               having both magnitude and direction )
-- Magnitude ( the maximum positive value of the height of the wave )
+- Magnitude ( maximum positive value of the height of the wave )
 
 ##### The SENSORS used to measure the variation:
 
 - Accelerometer         
 - Gyroscope
 
+
+
 ### Time
 
 ##### The measure capture "t" time-domain variation through sensor signals and takes consideration of the "-XYZ" 3-axial signals in the X, Y and Z directions, as indicated below:
 
-- "tAcc-XYZ"  ( Time accelerometer 3-axial signals ) subgroupped into:
+The measurements in Time domain also consider the two type of signal measurements of amplitude Jerk and Magnitude
+
+- "tAcc-XYZ"  ( Time accelerometer 3-axial signals ) subgroups:
                               
                               "tBodyAcc-XYZ"      ( Time Body Accelerometer 3-axial signals )
                               "tGravityAcc-XYZ"   ( Time Gravity accelerometer 3-axial signals )
@@ -90,14 +86,14 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 
 ###### \
 
-### Jerk signals
-#### Obtained deriving the body linear acceleration and the angular velocity:
+#### Jerk signals
+##### Obtained deriving the body linear acceleration and the angular velocity:
 
 - tBodyAccJerk-XYZ  ( Time Body Accelerometer Jerk 3-axial signals )
 - tBodyGyroJerk-XYZ ( Time Body Gyroscope Jerk 3-axial signals )
 
-### Magnitude
-#### The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
+#### Magnitude
+##### The magnitude of these three-dimensional signals were calculated using the Euclidean norm:
 
 - tBodyAccMag      ( Time Body Accelerometer Magnitude )
 - tGravityAccMag   ( Time Gravity Accelerometer Magnitude )
@@ -111,17 +107,20 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 ### Frequency
 ##### The Fast Fourier Transform (FFT) was applied to some of these signals producing,"f" frequency domain signals:
 
-###### Seven Frequency variables
+The measurements in Frequency domain also consider the two type of signal measurements of amplitude Jerk and Magnitude
 
 - fBodyAcc-XYZ     ( Frequency Body Accelerometer 3-axial signals )
-- fBodyAccJerk-XYZ ( Frequency Body Accelerometer Jerk 3-axial signals )
-- fBodyAccMag      ( Frequency Body Accelerometer Magnitude )
-- fBodyAccJerkMag  ( Frequency Body Accelerometer Jerk Magnitude )
-
-
 - fBodyGyro-XYZ    ( Frequency Body Gyroscope 3-axial signals )
-- fBodyGyroJerkMag ( Frequency Body Gyroscope Jerk Magnitude )
+
+#### Jerk signals
+- fBodyAccJerk-XYZ ( Frequency Body Accelerometer Jerk 3-axial signals )
+
+#### Magnitude
+- fBodyAccMag      ( Frequency Body Accelerometer Magnitude )
 - fBodyGyroMag     ( Frequency Body Gyroscope Magnitude )
+- fBodyAccJerkMag  ( Frequency Body Accelerometer Jerk Magnitude )
+- fBodyGyroJerkMag ( Frequency Body Gyroscope Jerk Magnitude )
+
 
 ##### \
 
@@ -152,7 +151,11 @@ while wearing a smartphone (Samsung Galaxy S II) on the waist to capture:
 ##### \
 
 ## Collection of the raw data
-The experiments have been video-recorded to label the data manually, and randomly partitioned into two sets.
+The experiment collection of data-sets were downloaded under .zip format at the following address:
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+The folder "UCI HAR Dataset" included two more "test" and "train" folders and four .txt files with information about the variables and variables labels. All the files were listed, read and subset as requested selecting only Mean and Standard Deviation as descriptive statistics. 
 
 ##### \
 
@@ -168,7 +171,15 @@ The experiments have been video-recorded to label the data manually, and randoml
 
 
 ### Cleaning of the data
-The cleaning script download and unzip the data sets, to check the requested information and the structure of the sets for merging them in a unique dataframe.
+After having downloaded the raw data, unzipped the files, selected the requested information, the sets were assembled in one unique dataset and the variables cleaned to have one variable per column and one observation per row. To do this the set were melt and dcast twice to obtain a clean four column set of mean data grouped per "Activity" and "Subject". The long-string of measurements renamed appropriately to make the variables name standing out more clearly and then separated within six variables:
+
+- Domain      (Time/Frequency)
+- Component   (Body/Gravity)
+- Sensor      (Accelerometer/Gyroscope)
+- Signal      (Jerk/Magnitude)
+- Stats       (Mean/Standard Deviation)
+- Direction   (X/Y/Z)
+
 
 ```{r}
 #source("README.md")
@@ -177,57 +188,119 @@ The cleaning script download and unzip the data sets, to check the requested inf
 ##### \
 
 # Description of the variables
-General description of the file including:
- - Dimensions of the dataset
+General description of the file includes :
+
+##### Dimensions of the datasets
  
 ```{r message=FALSE, warning=FALSE}
 source("run_analysis.R")
-dim(tidy_data_set);
-head(tidy_data_set)
+```
+
+
+##### Activity sets:
+```{r}
+dim(activity);
+head(activity)
+```
+
+
+##### Features sets:
+```{r}
+dim(features);
+head(features)
+```
+
+##### Training and Test selected descriptive Statistics sets:
+
+```{r message=FALSE, warning=FALSE}
+dim(training_and_test_stats);
+head(training_and_test_stats,c(4,4))
+```
+
+##### Final independent Tidy Data set:
+
+```{r message=FALSE, warning=FALSE}
+dim(tidy_data);
+head(tidy_data)
 ```
  
- - Summary of the data
+##### Summary of the data:
  
 ```{r}
-require(plyr)
-measurements_list<-plyr::count(tidy_data_set$variable)
-head(measurements_list);
-dim(measurements_list)
+summary(tidy_data)
 ```
  
- - Variables present in the dataset
+## Variables present in the dataset:
+
+##### Variable 1- Subject 
+Thirty subjects volunteers for the experiment represented as integers 1 to 30
+
+##### Variable 2 - Activity 
+##### Six activities per thirty subject makes 180 outcomes for each measurement
+- WALKING
+- WALKING_UPSTAIRS
+- WALKING_DOWNSTAIRS
+- SITTING
+- STANDING
+- LAYING
+
+##### Variable 3 - Domain 
+##### Two domains as character:
+- Time
+- Frequency
 
 ```{r}
-time<-filter(measurements_list,grepl("Time",x))
-time<-arrange(time,x)
-write.table(time, "time.txt", row.name=FALSE)
-time_txt<-read.table("time.txt")
-
-
-frequency<-filter(measurements_list,grepl("Fre",x))
+plyr::count(tidy_data$Domain)
 ```
 
-(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
+##### Variable 4 - Component 
+- Body
+- Gravity
+```{r}
+plyr::count(tidy_data$Component)
+```
 
-### Variable 1 (repeat this section for all variables in the dataset)
-Short description of what the variable describes.
+##### Variable 5 - Sensor 
+- Accelerometer         
+- Gyroscope
+```{r}
+plyr::count(tidy_data$Sensor)
+```
 
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
 
-(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
+##### Variable 6 - Signal 
+- Jerk      
+- Magnitude
+```{r}
+plyr::count(tidy_data$Signal)
+```
 
-#### Notes on variable 1:
-If available, some additional notes on the variable not covered elsewehere. If no notes are present leave this section out.
+##### Variable 7 - Stats 
+- Mean
+_ Standard Deviation
+```{r}
+plyr::count(tidy_data$Stats)
+```
 
-# Sources
-Sources you used if any, otherise leave out.
 
-## Annex
-If you used any code in the codebook that had the echo=FALSE attribute post this here (make sure you set the results parameter to 'hide' as you do not want the results to show again)
+##### Variable 8 - Direction
+- X
+- Y
+- Z
+
+```{r}
+plyr::count(tidy_data$Direction)
+```
+
+##### Variable 9 - Value
+
+0 to 1 rates as double numeric values identifying the results of the measurements of combination of variables
+
+# Source of the Project
+Getting Cleaning Data final Coursera Project by JHU: 
+- "https://www.coursera.org/learn/data-cleaning"
+
+
 
 
 
