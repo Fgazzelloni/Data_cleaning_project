@@ -1,10 +1,8 @@
 ---
 title: "Variables Codebook"
 subtitle: "Data cleaning project - Getting Cleaning Data - JHU"
-
 author: "Federica Gazzelloni"
 date: "23/12/2020 - 22/01/2021"
-
 output:
   html_document:
     toc: TRUE
@@ -12,9 +10,7 @@ output:
     toc_float:
       collapsed: TRUE
       smooth_scroll: FALSE
-      
     keep_md: yes
-    
 ---
 
 
@@ -37,7 +33,7 @@ The project require a new dataset with selected descriptive statistics and a rep
 
 - https://github.com/Fgazzelloni/Data_cleaning_project
 
-##### \
+##### 
 
 # Study design and data processing 
 
@@ -48,7 +44,7 @@ The project require a new dataset with selected descriptive statistics and a rep
 
 To measure the variation in Time and Frequency of linear acceleration and angular velocity with sensor signals accelerometer and gyroscope by applying noise filters and then sampled.
 
-##### \
+##### 
 
 ## Measurement of Variation
 
@@ -88,7 +84,7 @@ The measurements in Time domain also consider the two type of signal measurement
                               
 - "tGyro-XYZ" ( Time Gyroscope 3-axial signals )
 
-###### \
+###### 
 
 #### Jerk signals
 ##### Obtained deriving the body linear acceleration and the angular velocity:
@@ -126,7 +122,7 @@ The measurements in Frequency domain also consider the two type of signal measur
 - fBodyGyroJerkMag ( Frequency Body Gyroscope Jerk Magnitude )
 
 
-##### \
+##### 
 
 ## Descriptive statistics
 ##### Included descriptive statistics calculated to analyze results of measurements of interest in this project:  
@@ -152,7 +148,7 @@ The measurements in Frequency domain also consider the two type of signal measur
 - bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
 - angle(): Angle between to vectors.
 
-##### \
+##### 
 
 ## Collection of the raw data
 The experiment collection of data-sets were downloaded under .zip format at the following address:
@@ -161,7 +157,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 
 The folder "UCI HAR Dataset" included two more "test" and "train" folders and four .txt files with information about the variables and variables labels. All the files were listed, read and subset as requested selecting only Mean and Standard Deviation as descriptive statistics. 
 
-##### \
+##### 
 
 # Creating the tidy datafile
 
@@ -189,7 +185,7 @@ After having downloaded the raw data, unzipped the files, selected the requested
 #source("README.md")
 ```
 
-##### \
+##### 
 
 # Description of the variables
 General description of the file includes :
